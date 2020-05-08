@@ -178,8 +178,7 @@ export default class CreateCustomer extends Component {
     
     // submit the form
     
-    //remember - remove the below button used for stand alone testing (1st to be rendered) for integrating with the landing page--
-    //and set modal state to true rather than false
+    //remember - remove the below button used for stand alone testing (1st to be rendered) for integrating with the landing page
 
     render(){
         return(

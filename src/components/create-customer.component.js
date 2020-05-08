@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 
+// import all the required packages
+
 export default class CreateCustomer extends Component {
 
     constructor(props){
@@ -21,6 +23,7 @@ export default class CreateCustomer extends Component {
             countrylist: [],
             businesstypelist: [],
             modal: false
+            
 // remember -- change modal to true - while integrating with landing page            
         };
 
@@ -34,7 +37,8 @@ export default class CreateCustomer extends Component {
         this.toggle = this.toggle.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
      };
-
+// create an instance of the properties for the component and bind their change methods to this.
+    
      componentDidMount(){
         
         this.setState({
@@ -43,7 +47,9 @@ export default class CreateCustomer extends Component {
             businesstypelist: ['','Banking','Construction','Consumer Retail','Energy','Entertainment','Finance','Health','Hospitality','Media','Real Estate','Transportation']
         });
     }
-
+    
+// will be done only once - just after the component is loaded for the first time
+    
      toggle(){
         this.setState({modal: !this.state.modal});
         console.log(this.state.modal);
@@ -57,8 +63,7 @@ export default class CreateCustomer extends Component {
             postcode: ''
         });
     }   
-    //  countrylist - to retreive all the countries from the DB
-    //  businesstypelist - to retrieve all the business type list from DB
+    //  method to reset the states required
 
         onChangeName(e){
             this.setState( {
@@ -133,9 +138,10 @@ export default class CreateCustomer extends Component {
                 addthree: this.state.addthree,
                 postcode: this.state.postcode
             };
-    
+    // create a customer object to be passes and add all the properties
+            
             console.log(customer);
-
+// for my own testing
             axios.post('https://onboardingapplication.azurewebsites.net/customers/',customer)
             .then(res => {
                 console.log(res.data);
@@ -145,7 +151,7 @@ export default class CreateCustomer extends Component {
                 alert("There was an error saving the customer : " + error)
             });
 
-            //connect with backend API and do a post
+            //connect with backend API and do a post and check for errors, or alert on a successful addition
 
             this.setState ({
                 custId : '',
@@ -158,17 +164,20 @@ export default class CreateCustomer extends Component {
                 postcode: '',
                 modal: false
             });
-         //   window.location = '/';
+            
+     // reset the states before leaving the component to initialise the values for the next render.
+            
+           window.location = '/';
     
+    // remember - Comment/Remove window.location also before integrating with landing page
+    // meant for a stand alone testing of the page
              
         }
-    // remember - Remove window.location also before integrating with landing page
-    // meant for a stand alone testing of the page
-        // clicking of submit
-
-        //remember - remove the below button (1st to be rendered) for integrating with the landing page--
-        //and set modal state to true rather than false
-
+    
+    // submit the form
+    
+    //remember - remove the below button used for stand alone testing (1st to be rendered) for integrating with the landing page--
+    //and set modal state to true rather than false
 
     render(){
         return(
@@ -177,7 +186,7 @@ export default class CreateCustomer extends Component {
                 <Modal  show={this.state.modal} fade="false" style={{width: "1400px", display: "block"}}>
                 <Modal.Header>
                         <h6>Customer Registration Form</h6>
-                    </Modal.Header>
+                </Modal.Header>
                 <Modal.Body>
                 <Form horizontal="true" className="col-sm-12 offset sm-3" onSubmit={this.onSubmit}>
                     <Form.Group>
